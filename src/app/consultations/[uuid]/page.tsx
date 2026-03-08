@@ -223,7 +223,7 @@ export default function ConsultationDetailPage() {
               </Card>
             )}
 
-            {analysis?.redFlags?.length > 0 && (
+            {analysis && analysis.redFlags && analysis.redFlags.length > 0 && (
               <Card className="border-amber-500/30 bg-amber-500/5">
                 <CardHeader>
                   <CardTitle className="text-amber-400">Red Flags</CardTitle>
@@ -273,15 +273,15 @@ export default function ConsultationDetailPage() {
                         r.consent_status === 'withdrawn' ? 'bg-amber-400' : 'bg-slate-500'
                       }`} />
                       <span className="font-medium text-slate-200 capitalize">{String(r.consent_status)}</span>
-                      {r.withdrawal_date && (
+                      {'withdrawal_date' in r && r.withdrawal_date ? (
                         <span className="text-slate-500">(withdrawn {formatDate(String(r.withdrawal_date))})</span>
-                      )}
+                      ) : null}
                     </div>
                     <p className="mt-1 text-slate-400">Purpose: {String(r.purpose)}</p>
                     <p className="text-xs text-slate-500">Jurisdiction: {String(r.jurisdiction)} • Method: {String(r.consent_method)}</p>
-                    {r.registry && (
+                    {'registry' in r && r.registry ? (
                       <p className="mt-1 text-xs text-teal-400/80">SCITT receipt registered</p>
-                    )}
+                    ) : null}
                   </div>
                 ))}
               </CardContent>

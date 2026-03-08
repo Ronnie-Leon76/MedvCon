@@ -6,8 +6,8 @@ export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ uuid: string }> }
 ) {
+  const { uuid } = await params;
   try {
-    const { uuid } = await params;
     const result = await getVCon(uuid);
     return NextResponse.json(result);
   } catch (error) {

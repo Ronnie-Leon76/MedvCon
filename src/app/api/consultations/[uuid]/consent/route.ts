@@ -13,7 +13,7 @@ export async function GET(
 
   const consentAttachments = (vcon.attachments || []).filter(
     (a): a is { type: string; encoding: string; party: number; body: string } =>
-      a && typeof a === 'object' && 'type' in a && (a as { type: string }).type === 'consent_record'
+      Boolean(a && typeof a === 'object' && 'type' in a && (a as { type: string }).type === 'consent_record')
   );
 
   const consentRecords = consentAttachments.map((a) => {
